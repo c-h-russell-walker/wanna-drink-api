@@ -1,12 +1,19 @@
 
 class WannaUser():
 
-    def __init__(self, *args, **kwargs):
-        username = kwargs.get('username')
-        self.password = kwargs.get('password')
-        self.preferred_styles = kwargs.get('styles')
-        self.favorites = kwargs.get('favorites')
-        self.default_zip = kwargs.get('zipcode')
+    def __init__(self, user_form, *args, **kwargs):
+        self.username = user_form.get('username')
+        self.password = user_form.get('password')
+        self.preferred_styles = user_form.get('styles')
+        self.favorites = user_form.get('favorites')
+        self.default_zip = user_form.get('zipcode')
+        self.default_lat = user_form.get('latitude')
+        self.default_long = user_form.get('longitude')
+
+
+    def to_dict(self):
+        return self.__dict__
+
 
     @staticmethod
     def is_valid(user_form):

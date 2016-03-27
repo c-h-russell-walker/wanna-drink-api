@@ -7,3 +7,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 wanna/
+
+# Fixtures/DB Stubs
+fixtures/users.json
