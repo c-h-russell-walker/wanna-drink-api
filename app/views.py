@@ -1,6 +1,6 @@
 import json
 
-from flask import jsonify, request
+from flask import jsonify, request, session
 
 from app import app
 from exceptions import InvalidUsage
@@ -9,10 +9,16 @@ from models import WannaUser
 
 # TODO - figure out if there's a way to not have to prefix all routes with 'api'
 
-@app.route('/api/account', methods=['GET'])
-def account():
-    # Bundled with sign in most likely
+@app.route('/api/login', methods=['POST'])
+def login():
     pass
+
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    current_user = session.pop('username', None)
+    message = 'No user to logout' if not current_user else 'Logged out'
+    return jsonify({'message': message})
 
 
 @app.route('/api/account', methods=['POST'])
