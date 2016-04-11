@@ -18,13 +18,16 @@ def account():
 @app.route('/api/account', methods=['POST'])
 def post_to_account():
     try:
-        # TODO - figure out static method for Flask model
-        assert WannaUser.is_valid(request.form)
-        user = WannaUser(request.form)
+        user_form = request.form.copy()
+        assert WannaUser.is_valid(user_form)
+
+        user = WannaUser(user_form)
         # TODO - check if we have one - create it or update
         create_account(user)
     except Exception as e:
         raise InvalidUsage('Your user data is incorrect', status_code=400)
+
+    return jsonify({'status_code': 200, 'success': True})
 
 
 @app.route('/api/styles', methods=['GET'])
