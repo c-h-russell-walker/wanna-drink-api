@@ -1,3 +1,9 @@
+import re
+
+
+class ValidationError(Exception):
+    pass
+
 
 class WannaUser():
 
@@ -17,4 +23,6 @@ class WannaUser():
 
     @staticmethod
     def is_valid(user_form):
+        if not re.match(r'[^@]+@[^@]+\.[^@]+', user_form.get('username')):
+            raise ValidationError('Username must be a valid email address.')
         return True

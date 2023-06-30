@@ -24,8 +24,8 @@ def post_to_account():
         user = WannaUser(user_form)
         # TODO - check if we have one - create it or update
         create_account(user)
-    except Exception as e:
-        raise InvalidUsage('Your user data is incorrect', status_code=400)
+    except Exception as exc:
+        raise InvalidUsage(exc.message, status_code=400)
 
     return jsonify({'status_code': 200, 'success': True})
 
